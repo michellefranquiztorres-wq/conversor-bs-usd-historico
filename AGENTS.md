@@ -1,65 +1,28 @@
-# AGENTS.md · Reglas para asistentes de IA
+# Conversor Bs/USD con histórico
 
-Este archivo lo leen los asistentes de programación (Copilot, Claude Code, Cursor, Codex y otros)
-antes de trabajar en este repositorio. Cualquier persona también puede leerlo: resume cómo
-está organizado el proyecto y qué reglas sigue.
+## Descripción del producto
 
-## Contexto
+El Conversor Bs/USD con histórico es una aplicación web que permite consultar y comprender la evolución del tipo de cambio entre el bolívar venezolano (Bs) y el dólar estadounidense (USD) a través de registros históricos. El sistema busca facilitar la consulta de valores correspondientes a diferentes fechas, permitiendo al usuario visualizar las variaciones del tipo de cambio de manera sencilla, organizada e intuitiva.
 
-- Proyecto académico de **Lenguaje de Programación** (5.º semestre, Ingeniería de Sistemas).
-- La persona que programa es **estudiante**: está aprendiendo. Tu rol es enseñar y revisar, no
-  resolverle la materia.
-- Producto: <!-- el alumno describe aquí su producto en 2 líneas -->
+La aplicación contará con un gráfico visual de los valores históricos, herramientas para consultar tasas correspondientes a fechas específicas y funcionalidades de búsqueda eficientes para localizar registros sin necesidad de recorrer toda la información.
 
-## Reglas obligatorias
+## Objetivo principal
 
-1. **No escribas el código de `src/shared/structures/` ni de `src/shared/algorithms/`** (épicas E3 y E4).
-   Esas estructuras y algoritmos los escribe el estudiante a mano. Puedes explicar el concepto,
-   dar pistas, revisar su código o señalar errores, pero no entregues la implementación.
-2. **SQL escrito a mano, sin ORM.** Toda consulta va en un repositorio (`*.repository.ts`) y es
-   parametrizada (`$1`, `$2`). Nunca concatenes texto del usuario dentro de una consulta.
-3. **Cambios a la base = migración nueva** en `db/migrations/NNN_descripcion.sql`.
-   Nunca edites una migración existente.
-4. **Valida toda entrada** a la API con el esquema Zod del `*.model.ts` de la funcionalidad y responde con el código HTTP correcto.
-5. **Cada cambio lleva pruebas.** Unitarias en `tests/unit`, de API en `tests/integration`.
-6. **Explica lo que propones.** Cada bloque de código que sugieras debe venir con una explicación
-   breve de qué hace y por qué, para que el estudiante pueda defenderlo en vivo.
-7. **No subas secretos.** Nada de contraseñas ni `.env` en el código.
-8. **Screaming architecture.** Una carpeta por funcionalidad del negocio en `src/` (`src/sales`, `src/products`…),
-   con su `*.model.ts`, `*.repository.ts`, `*.routes.ts`, `*.api.ts` y `*.view.ts`. Nunca crees carpetas
-   por capa técnica (`controllers`, `models`, `services`, `routes`, `utils`…). `src/shared` no importa
-   funcionalidades; las funcionalidades no importan `src/app`. Ver `docs/arquitectura.md`.
+Desarrollar una aplicación web que permita consultar, visualizar y analizar registros históricos del tipo de cambio Bs/USD, proporcionando una interfaz sencilla, datos organizados y mecanismos eficientes de búsqueda.
 
-## Convenciones
+## Funcionalidades principales
 
-- Código, nombres, commits y PR en **inglés**; comentarios y documentación pueden ir en español.
-- TypeScript en modo `strict`, sin `any`. Solo sintaxis que Node.js puede ejecutar directamente:
-  nada de `enum`, `namespace` ni propiedades en parámetros de constructor.
-- Los imports locales llevan la extensión `.ts` (ejemplo: `import { x } from './x.ts'`).
-- Commits con Conventional Commits: `feat:`, `fix:`, `test:`, `docs:`, `refactor:`, `chore:`.
+- Conversión y consulta de valores Bs/USD.
+- Visualización de la evolución histórica del tipo de cambio mediante gráficos.
+- Búsqueda de valores correspondientes a fechas específicas.
+- Organización y almacenamiento de registros históricos.
+- Búsqueda eficiente de información mediante algoritmos.
+- Interfaz intuitiva y accesible para el usuario.
 
-## Estructura
+## Tecnologías y enfoque
 
-```
-src/<funcionalidad>/   una carpeta por funcionalidad del negocio (screaming architecture):
-                       *.model.ts · *.repository.ts · *.routes.ts · *.api.ts · *.view.ts
-src/tasks/             funcionalidad de ejemplo de la plantilla
-src/shared/            lo técnico y reutilizable: config, db, logger, http-client, operation-log
-src/shared/structures/ estructuras de datos propias (las escribe el estudiante)
-src/shared/algorithms/ ordenamiento y búsqueda propios (los escribe el estudiante)
-src/app/               arranque: server.ts (API y señales), create-app.ts (rutas), web/ (index.html, main.ts)
-db/                    migraciones SQL, semillas y ejecutor de migraciones
-tests/                 unit · integration · e2e (architecture.test.ts revisa la estructura)
-docs/                  PRD, arquitectura, decisiones (ADR), ingeniería inversa, seguridad
-```
+El proyecto contempla el uso de tecnologías web, TypeScript, Node.js, base de datos PostgreSQL y herramientas de visualización gráfica, además de estructuras de datos y algoritmos que permitan optimizar el almacenamiento, procesamiento y consulta de la información.
 
-## Comandos
+## Propósito
 
-| Comando | Qué hace |
-| --- | --- |
-| `docker compose up -d` | Levanta PostgreSQL |
-| `npm run migrate` | Aplica migraciones |
-| `npm run dev` | API + frontend en modo desarrollo |
-| `npm run check` | Lint + tipos + pruebas unitarias (correr antes de cada commit) |
-| `npm run test:integration` | Pruebas de API contra PostgreSQL |
-| `npm run test:e2e` | Pruebas en navegador con Playwright |
+Ofrecer una herramienta práctica que permita consultar el comportamiento histórico del tipo de cambio Bs/USD, facilitando la comprensión de sus variaciones y el acceso a información registrada en diferentes períodos de tiempo.
